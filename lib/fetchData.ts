@@ -15,7 +15,16 @@ import type {
 
 const OPENSHEET = "https://opensheet.elk.sh";
 
-export const SHEET_REVALIDATE_SECONDS = 86_400;
+/** Padrão 60s: em produção (Vercel) o Next cacheia o fetch; 24h fazia a planilha parecer “congelada”. 0 = sem cache. */
+function sheetFetchOptions(): { cache: "no-store" } | { next: { revalidate: number } } {
+  const raw = process.env.SPREADSHEET_REVALIDATE_SECONDS?.trim();
+  if (raw === "0" || raw?.toLowerCase() === "false") {
+    return { cache: "no-store" };
+  }
+  const n = raw ? Number.parseInt(raw, 10) : NaN;
+  const seconds = Number.isFinite(n) && n >= 0 ? n : 60;
+  return { next: { revalidate: seconds } };
+}
 
 function getSpreadsheetId(): string | null {
   const id = process.env.SPREADSHEET_ID?.trim();
@@ -41,9 +50,7 @@ export async function fetchSheetRows(
   const url = `${OPENSHEET}/${encodeURIComponent(id)}/${encodeURIComponent(tab)}?raw=true`;
 
   try {
-    const res = await fetch(url, {
-      next: { revalidate: SHEET_REVALIDATE_SECONDS },
-    });
+    const res = await fetch(url, sheetFetchOptions());
 
     if (!res.ok) {
       return {
