@@ -1,7 +1,7 @@
 /** Nome exibido no portal */
 export const SITE_NAME = "HR Connect";
 
-/** Organização (crédito / rodapé) */
+/** Organização (metadados e textos do portal) */
 export const ORG_NAME = "Invent Software";
 
 /**
@@ -9,5 +9,5 @@ export const ORG_NAME = "Invent Software";
  * Texto curto, sem dados sensíveis.
  */
 export const ACADEMIC_NOTICE =
-  "Ambiente desenvolvimento e teste — não constitui canal oficial da empresa.";
+  "Ambiente desenvolvimento — não constitui informações reais.";
 
