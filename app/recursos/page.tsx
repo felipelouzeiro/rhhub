@@ -11,14 +11,14 @@ export default async function RecursosPage() {
   const { data, error } = await getRecursos();
 
   return (
-    <div>
+    <div className="min-w-0 max-w-full">
       <SheetErrorBanner message={error} />
       <h1 className="mb-2 text-2xl font-semibold text-[#1F2937]">Recursos</h1>
-      <p className="mb-8 text-[#6B7280]">{leadRecursos}</p>
+      <p className="mb-8 break-words text-[#6B7280]">{leadRecursos}</p>
       {data.length === 0 && !error ? (
         <p className="text-sm text-[#6B7280]">{emptyRecursos}</p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">
           {data.map((r, i) => (
             <ResourceCard
               key={`${r.title}-${i}`}

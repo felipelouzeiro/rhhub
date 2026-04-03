@@ -1,7 +1,3 @@
-/**
- * Textos da interface para o colaborador (tom institucional, sem detalhe técnico).
- */
-
 import { ORG_NAME } from "@/lib/site";
 
 export function homeLead(): string {
@@ -24,7 +20,6 @@ export function leadEmpresa(): string {
 export const emptyEventosProximos = "Nenhum evento futuro no momento.";
 export const emptyComunicados = "Nenhum comunicado no momento.";
 export const emptyOnboarding = "Nenhuma atividade no momento.";
-export const emptyComunicadosPage = "Nenhum comunicado no momento.";
 export const emptyRecursos = "Nenhum recurso no momento.";
 export const emptyEventosCalendar = "Nenhum evento no momento.";
 

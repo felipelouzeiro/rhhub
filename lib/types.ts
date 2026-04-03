@@ -15,7 +15,6 @@ export type Evento = {
   sortDate: Date | null;
 };
 
-/** Linha da aba onboarding — quadro Kanban pessoal (status no navegador). */
 export type OnboardingKanbanItem = {
   id: string;
   title: string;

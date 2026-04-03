@@ -1,4 +1,3 @@
-/** Obtém célula da linha da planilha com tolerância a variação de maiúsculas no cabeçalho. */
 export function cell(
   row: Record<string, string>,
   ...preferredKeys: string[]

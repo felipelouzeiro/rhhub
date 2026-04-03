@@ -25,6 +25,26 @@ import type { OnboardingKanbanItem } from "@/lib/types";
 const STORAGE_KEY = "onboardingKanbanStatus";
 const DROP_PREFIX = "col:";
 
+function loadStatusFromStorage(): Record<string, KanbanColumn> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+    const o = parsed as Record<string, string>;
+    const next: Record<string, KanbanColumn> = {};
+    for (const [k, v] of Object.entries(o)) {
+      if (isKanbanColumn(v)) next[k] = v;
+    }
+    return next;
+  } catch {
+    return {};
+  }
+}
+
 function dropId(col: KanbanColumn) {
   return `${DROP_PREFIX}${col}`;
 }
@@ -173,55 +193,22 @@ function KanbanCard({
 
 export function OnboardingKanban({ items }: Props) {
   const [statusById, setStatusById] = useState<Record<string, KanbanColumn>>(
-    () => ({}),
+    loadStatusFromStorage,
   );
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as unknown;
-        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-          const o = parsed as Record<string, string>;
-          const next: Record<string, KanbanColumn> = {};
-          for (const [k, v] of Object.entries(o)) {
-            if (isKanbanColumn(v)) next[k] = v;
-          }
-          setStatusById(next);
-        }
-      }
-    } catch {
-      /* ignore */
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(statusById));
-    } catch {
-      /* ignore */
-    }
-  }, [statusById, hydrated]);
 
   const validIds = useMemo(() => new Set(items.map((i) => i.id)), [items]);
 
   useEffect(() => {
-    if (!hydrated) return;
-    setStatusById((prev) => {
-      let changed = false;
-      const next = { ...prev };
-      for (const k of Object.keys(next)) {
-        if (!validIds.has(k)) {
-          delete next[k];
-          changed = true;
-        }
+    try {
+      const toSave: Record<string, KanbanColumn> = {};
+      for (const [k, v] of Object.entries(statusById)) {
+        if (validIds.has(k)) toSave[k] = v;
       }
-      return changed ? next : prev;
-    });
-  }, [hydrated, validIds]);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    } catch {
+      /* ignore */
+    }
+  }, [statusById, validIds]);
 
   const byId = useMemo(
     () => new Map(items.map((i) => [i.id, i] as const)),

@@ -46,9 +46,12 @@ export default function RootLayout({
         >
           {ACADEMIC_NOTICE}
         </p>
-        <div id="conteudo-principal" className="flex flex-1 flex-col">
+        <div
+          id="conteudo-principal"
+          className="flex min-w-0 flex-1 flex-col"
+        >
           <Header />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+          <main className="mx-auto w-full min-w-0 max-w-6xl flex-1 px-4 py-8">
             {children}
           </main>
           <Footer />

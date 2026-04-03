@@ -15,7 +15,7 @@ import {
   emptyOnboarding,
   homeLead,
 } from "@/lib/copy";
-import { ORG_NAME, SITE_NAME } from "@/lib/site";
+import { SITE_NAME } from "@/lib/site";
 
 export const metadata = {
   title: "Início",

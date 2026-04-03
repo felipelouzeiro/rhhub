@@ -14,10 +14,10 @@ const nav = [
 export function Header() {
   return (
     <header className="border-b border-[#E5E7EB] bg-white shadow-sm">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mx-auto flex w-full min-w-0 max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
         <Link
           href="/"
-          className="flex items-center gap-3 text-[#1F2937] no-underline"
+          className="flex min-w-0 items-center gap-3 text-[#1F2937] no-underline"
         >
           <Image
             src="/invent_software_logo.png"
@@ -27,7 +27,7 @@ export function Header() {
             className="h-14 w-auto max-w-[min(100%,220px)] object-contain sm:h-16"
             priority
           />
-          <span className="text-lg font-semibold tracking-tight">
+          <span className="min-w-0 text-lg font-semibold tracking-tight">
             {SITE_NAME}
           </span>
         </Link>

@@ -1,7 +1,7 @@
 import { AnnouncementCard } from "@/components/AnnouncementCard";
 import { Pagination } from "@/components/Pagination";
 import { SheetErrorBanner } from "@/components/SheetErrorBanner";
-import { emptyComunicadosPage, leadComunicados } from "@/lib/copy";
+import { emptyComunicados, leadComunicados } from "@/lib/copy";
 import { getComunicados } from "@/lib/fetchData";
 import { redirect } from "next/navigation";
 
@@ -46,7 +46,7 @@ export default async function ComunicadosPage({ searchParams }: PageProps) {
       </h1>
       <p className="mb-8 text-[#6B7280]">{leadComunicados}</p>
       {data.length === 0 && !error ? (
-        <p className="text-sm text-[#6B7280]">{emptyComunicadosPage}</p>
+        <p className="text-sm text-[#6B7280]">{emptyComunicados}</p>
       ) : (
         <>
           <div className="space-y-6">

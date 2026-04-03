@@ -15,7 +15,6 @@ import type {
 
 const OPENSHEET = "https://opensheet.elk.sh";
 
-/** Revalidação em segundos (conteúdo semanal; cache diário equilibra frescor e custo). */
 export const SHEET_REVALIDATE_SECONDS = 86_400;
 
 function getSpreadsheetId(): string | null {
@@ -194,7 +193,6 @@ export async function getRecursos(): Promise<SheetFetchResult<Recurso[]>> {
   return { data: list, error: null };
 }
 
-/** Resumo para a home: primeiros caracteres do conteúdo ou coluna opcional summary. */
 export function comunicadoResumo(c: Comunicado, maxLen = 160): string {
   const s = c.content.trim();
   if (!s) return "";
