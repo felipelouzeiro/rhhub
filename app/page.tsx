@@ -9,6 +9,12 @@ import {
   getOnboardingKanbanItems,
 } from "@/lib/fetchData";
 import { proximosEventos } from "@/lib/events";
+import {
+  emptyComunicados,
+  emptyEventosProximos,
+  emptyOnboarding,
+  homeLead,
+} from "@/lib/copy";
 import { ORG_NAME, SITE_NAME } from "@/lib/site";
 
 export const metadata = {
@@ -41,11 +47,7 @@ export default async function Home() {
         <h1 className="text-2xl font-semibold text-[#1F2937]">
           Bem-vindo ao {SITE_NAME}
         </h1>
-        <p className="mt-3 max-w-2xl text-[#6B7280]">
-          Aqui você encontra comunicados, eventos e recursos da {ORG_NAME}. O
-          conteúdo é atualizado pelo RH na planilha — atualize a página para ver
-          as últimas informações.
-        </p>
+        <p className="mt-3 max-w-2xl text-[#6B7280]">{homeLead()}</p>
       </section>
 
       <section>
@@ -61,7 +63,7 @@ export default async function Home() {
           </Link>
         </div>
         {proximos.length === 0 ? (
-          <p className="text-sm text-[#6B7280]">Nenhum evento próximo.</p>
+          <p className="text-sm text-[#6B7280]">{emptyEventosProximos}</p>
         ) : (
           <ul className="grid gap-3 sm:grid-cols-3">
             {proximos.map((e) => (
@@ -95,7 +97,7 @@ export default async function Home() {
           </Link>
         </div>
         {recentes.length === 0 ? (
-          <p className="text-sm text-[#6B7280]">Nenhum comunicado ainda.</p>
+          <p className="text-sm text-[#6B7280]">{emptyComunicados}</p>
         ) : (
           <div className="grid gap-4 md:grid-cols-3">
             {recentes.map((c, i) => (
@@ -122,9 +124,7 @@ export default async function Home() {
           </Link>
         </div>
         {destaque.length === 0 ? (
-          <p className="text-sm text-[#6B7280]">
-            Nenhuma atividade de onboarding cadastrada.
-          </p>
+          <p className="text-sm text-[#6B7280]">{emptyOnboarding}</p>
         ) : (
           <ul className="grid gap-3 md:grid-cols-3">
             {destaque.map((a, i) => (
@@ -139,8 +139,7 @@ export default async function Home() {
                   </p>
                 ) : null}
                 <p className="mt-2 text-xs text-[#6B7280]">
-                  Prazo sugerido:{" "}
-                  {formatDatePtBr(a.sortDeadline ?? a.deadline)}
+                  Prazo: {formatDatePtBr(a.sortDeadline ?? a.deadline)}
                 </p>
               </li>
             ))}

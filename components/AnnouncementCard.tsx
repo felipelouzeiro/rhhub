@@ -42,7 +42,7 @@ export function AnnouncementCard({ item, expanded, resumo }: Props) {
         </time>
       </div>
       <h2 className="text-lg font-semibold text-[#1F2937]">{item.title}</h2>
-      {resumo != null && !expanded ? (
+      {resumo != null && resumo !== "" && !expanded ? (
         <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">{resumo}</p>
       ) : null}
       {expanded ? (

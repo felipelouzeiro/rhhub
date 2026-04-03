@@ -19,6 +19,7 @@ import {
   KANBAN_COLUMNS,
   isKanbanColumn,
 } from "@/lib/kanban";
+import { emptyOnboarding } from "@/lib/copy";
 import type { OnboardingKanbanItem } from "@/lib/types";
 
 const STORAGE_KEY = "onboardingKanbanStatus";
@@ -131,7 +132,7 @@ function KanbanCard({
             <p className="mt-1 text-sm text-[#6B7280]">{item.description}</p>
           ) : null}
           <p className="mt-2 text-xs text-[#6B7280]">
-            Prazo sugerido:{" "}
+            Prazo:{" "}
             {formatDatePtBr(
               item.sortDeadline instanceof Date
                 ? item.sortDeadline
@@ -142,7 +143,7 @@ function KanbanCard({
           </p>
           {locked ? (
             <p className="mt-2 text-xs font-medium text-[#6B7280]">
-              Definido pelo RH
+              Definição institucional
             </p>
           ) : null}
           <label className="mt-3 block text-xs text-[#6B7280]">
@@ -286,7 +287,7 @@ export function OnboardingKanban({ items }: Props) {
 
   if (items.length === 0) {
     return (
-      <p className="text-sm text-[#6B7280]">Nenhuma atividade cadastrada.</p>
+      <p className="text-sm text-[#6B7280]">{emptyOnboarding}</p>
     );
   }
 

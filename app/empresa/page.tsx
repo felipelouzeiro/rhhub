@@ -1,4 +1,4 @@
-import { ORG_NAME } from "@/lib/site";
+import { leadEmpresa } from "@/lib/copy";
 
 export const metadata = {
   title: "Empresa",
@@ -57,9 +57,7 @@ export default function EmpresaPage() {
     <div className="space-y-10">
       <header>
         <h1 className="text-2xl font-semibold text-[#1F2937]">Empresa</h1>
-        <p className="mt-2 text-[#6B7280]">
-          Conheça um pouco da cultura e dos valores da {ORG_NAME}.
-        </p>
+        <p className="mt-2 text-[#6B7280]">{leadEmpresa()}</p>
       </header>
 
       <section className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">

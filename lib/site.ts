@@ -11,6 +11,3 @@ export const ORG_NAME = "Invent Software";
 export const ACADEMIC_NOTICE =
   "Ambiente demonstrativo desenvolvido no âmbito de projeto acadêmico extensionista — não constitui canal oficial da empresa.";
 
-/** Rodapé — sem expor e-mail corporativo. */
-export const SUPPORT_MESSAGE =
-  "Dúvidas sobre o portal: procure o setor de Recursos Humanos.";

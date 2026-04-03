@@ -1,3 +1,9 @@
+import {
+  errorContentInvalid,
+  errorContentUnavailable,
+  errorLoadSection,
+  errorNetwork,
+} from "@/lib/copy";
 import { parseSheetDate } from "@/lib/date";
 import { cell } from "@/lib/rowHelpers";
 import type {
@@ -29,7 +35,7 @@ export async function fetchSheetRows(
   if (!id) {
     return {
       data: [],
-      error: "Configure SPREADSHEET_ID no ambiente (.env.local / Vercel).",
+      error: errorContentUnavailable,
     };
   }
 
@@ -43,13 +49,13 @@ export async function fetchSheetRows(
     if (!res.ok) {
       return {
         data: [],
-        error: `Não foi possível carregar a aba "${tab}" (${res.status}).`,
+        error: errorLoadSection(tab),
       };
     }
 
     const json: unknown = await res.json();
     if (!Array.isArray(json)) {
-      return { data: [], error: "Formato de dados da planilha inválido." };
+      return { data: [], error: errorContentInvalid };
     }
 
     const rows = json.map((row) => {
@@ -66,7 +72,7 @@ export async function fetchSheetRows(
   } catch {
     return {
       data: [],
-      error: "Falha de rede ao acessar a planilha. Tente novamente mais tarde.",
+      error: errorNetwork,
     };
   }
 }
@@ -191,7 +197,7 @@ export async function getRecursos(): Promise<SheetFetchResult<Recurso[]>> {
 /** Resumo para a home: primeiros caracteres do conteúdo ou coluna opcional summary. */
 export function comunicadoResumo(c: Comunicado, maxLen = 160): string {
   const s = c.content.trim();
-  if (!s) return "Sem resumo.";
+  if (!s) return "";
   if (s.length <= maxLen) return s;
   return `${s.slice(0, maxLen).trim()}…`;
 }

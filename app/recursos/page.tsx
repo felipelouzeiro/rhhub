@@ -1,4 +1,5 @@
 import { ResourceCard } from "@/components/ResourceCard";
+import { emptyRecursos, leadRecursos } from "@/lib/copy";
 import { SheetErrorBanner } from "@/components/SheetErrorBanner";
 import { getRecursos } from "@/lib/fetchData";
 
@@ -13,11 +14,9 @@ export default async function RecursosPage() {
     <div>
       <SheetErrorBanner message={error} />
       <h1 className="mb-2 text-2xl font-semibold text-[#1F2937]">Recursos</h1>
-      <p className="mb-8 text-[#6B7280]">
-        Links e ferramentas internas. Os endereços são abertos em nova aba.
-      </p>
+      <p className="mb-8 text-[#6B7280]">{leadRecursos}</p>
       {data.length === 0 && !error ? (
-        <p className="text-sm text-[#6B7280]">Nenhum recurso cadastrado.</p>
+        <p className="text-sm text-[#6B7280]">{emptyRecursos}</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
           {data.map((r, i) => (

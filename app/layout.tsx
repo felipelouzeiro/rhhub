@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} · ${ORG_NAME}`,
     template: `%s · ${SITE_NAME}`,
   },
-  description: `Portal interno de comunicação — ${ORG_NAME}.`,
+  description: `Comunicados, agenda e recursos — ${ORG_NAME}.`,
 };
 
 export default function RootLayout({

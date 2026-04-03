@@ -1,4 +1,5 @@
-import { ORG_NAME, SUPPORT_MESSAGE } from "@/lib/site";
+import { footerSupport, footerTagline } from "@/lib/copy";
+import { ORG_NAME } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -7,8 +8,8 @@ export function Footer() {
         <p>
           © {new Date().getFullYear()} {ORG_NAME}
         </p>
-        <p>Portal interno RH</p>
-        <p className="max-w-md text-right sm:text-right">{SUPPORT_MESSAGE}</p>
+        <p>{footerTagline}</p>
+        <p className="max-w-md text-right sm:text-right">{footerSupport}</p>
       </div>
     </footer>
   );

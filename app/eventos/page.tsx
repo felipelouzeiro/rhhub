@@ -1,4 +1,5 @@
 import { EventCalendar } from "@/components/EventCalendar";
+import { leadEventos } from "@/lib/copy";
 import { SheetErrorBanner } from "@/components/SheetErrorBanner";
 import { toEventoCalView } from "@/lib/eventView";
 import { getEventos } from "@/lib/fetchData";
@@ -15,10 +16,7 @@ export default async function EventosPage() {
     <div>
       <SheetErrorBanner message={error} />
       <h1 className="mb-2 text-2xl font-semibold text-[#1F2937]">Eventos</h1>
-      <p className="mb-8 text-[#6B7280]">
-        Calendário institucional: treinamentos, confraternizações e campanhas.
-        Toque em um dia com marcação ou em um item da lista para ver detalhes.
-      </p>
+      <p className="mb-8 text-[#6B7280]">{leadEventos}</p>
       <EventCalendar events={views} />
     </div>
   );

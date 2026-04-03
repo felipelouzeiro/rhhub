@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { emptyEventosCalendar } from "@/lib/copy";
 import { formatDatePtBr, parseSheetDate } from "@/lib/date";
 import type { EventoCalView } from "@/lib/eventView";
 
@@ -132,12 +133,10 @@ export function EventCalendar({ events }: Props) {
       </div>
 
       <div>
-        <h3 className="mb-3 text-sm font-semibold text-[#1F2937]">
-          Lista de eventos
-        </h3>
+        <h3 className="mb-3 text-sm font-semibold text-[#1F2937]">Eventos</h3>
         <ul className="space-y-2">
           {events.length === 0 ? (
-            <li className="text-sm text-[#6B7280]">Nenhum evento cadastrado.</li>
+            <li className="text-sm text-[#6B7280]">{emptyEventosCalendar}</li>
           ) : (
             events.map((e, idx) => (
               <li key={`${e.title}-${e.dateKey}-${idx}`}>

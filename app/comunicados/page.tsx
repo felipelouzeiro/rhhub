@@ -1,4 +1,8 @@
 import { AnnouncementCard } from "@/components/AnnouncementCard";
+import {
+  emptyComunicadosPage,
+  leadComunicados,
+} from "@/lib/copy";
 import { SheetErrorBanner } from "@/components/SheetErrorBanner";
 import { getComunicados } from "@/lib/fetchData";
 
@@ -15,11 +19,9 @@ export default async function ComunicadosPage() {
       <h1 className="mb-2 text-2xl font-semibold text-[#1F2937]">
         Comunicados
       </h1>
-      <p className="mb-8 text-[#6B7280]">
-        Comunicados publicados pelo setor de Recursos Humanos.
-      </p>
+      <p className="mb-8 text-[#6B7280]">{leadComunicados}</p>
       {data.length === 0 && !error ? (
-        <p className="text-sm text-[#6B7280]">Nenhum comunicado cadastrado.</p>
+        <p className="text-sm text-[#6B7280]">{emptyComunicadosPage}</p>
       ) : (
         <div className="space-y-6">
           {data.map((c, i) => (
