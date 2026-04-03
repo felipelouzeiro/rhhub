@@ -132,30 +132,42 @@ export function EventCalendar({ events }: Props) {
         })}
       </div>
 
-      <div>
-        <h3 className="mb-3 text-sm font-semibold text-[#1F2937]">Eventos</h3>
-        <ul className="space-y-2">
-          {events.length === 0 ? (
-            <li className="text-sm text-[#6B7280]">{emptyEventosCalendar}</li>
-          ) : (
-            events.map((e, idx) => (
-              <li key={`${e.title}-${e.dateKey}-${idx}`}>
-                <button
-                  type="button"
-                  className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-3 text-left text-sm shadow-sm transition-shadow hover:shadow-md"
-                  onClick={() => setModal(e)}
-                >
-                  <span className="font-medium text-[#1F2937]">{e.title}</span>
-                  <span className="mt-1 block text-[#6B7280]">
-                    {formatDatePtBr(parseSheetDate(e.date) ?? e.date)}
-                    {e.location ? ` · ${e.location}` : ""}
-                  </span>
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
-      </div>
+      <section
+        className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm"
+        aria-label="Lista de eventos"
+      >
+        <div className="flex items-center justify-between gap-3 border-b border-[#E5E7EB] px-4 py-3">
+          <h3 className="text-sm font-semibold text-[#1F2937]">Eventos</h3>
+          {events.length > 0 ? (
+            <span className="shrink-0 text-xs tabular-nums text-[#6B7280]">
+              {events.length}
+            </span>
+          ) : null}
+        </div>
+        <div className="max-h-[min(50vh,18rem)] overflow-y-auto overscroll-y-contain px-3 py-3 sm:max-h-[min(55vh,26rem)]">
+          <ul className="space-y-2 pr-1">
+            {events.length === 0 ? (
+              <li className="text-sm text-[#6B7280]">{emptyEventosCalendar}</li>
+            ) : (
+              events.map((e, idx) => (
+                <li key={`${e.title}-${e.dateKey}-${idx}`}>
+                  <button
+                    type="button"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-[#F7F8FA]/40 px-4 py-3 text-left text-sm shadow-sm transition-shadow hover:border-[#F2C94C]/60 hover:bg-white hover:shadow-md"
+                    onClick={() => setModal(e)}
+                  >
+                    <span className="font-medium text-[#1F2937]">{e.title}</span>
+                    <span className="mt-1 block text-[#6B7280]">
+                      {formatDatePtBr(parseSheetDate(e.date) ?? e.date)}
+                      {e.location ? ` · ${e.location}` : ""}
+                    </span>
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      </section>
 
       {modal ? (
         <div

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Protótipo de interface — HR Connect</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+        background: #f7f8fa;
+        color: #1f2937;
+        line-height: 1.45;
+        padding: 1.5rem;
+        max-width: 56rem;
+        margin-inline: auto;
+      }
+      h1 {
+        font-size: 1.15rem;
+        margin: 0 0 0.25rem;
+      }
+      .meta {
+        font-size: 0.8rem;
+        color: #6b7280;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .screen {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+      }
+      .screen-title {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #f2994a;
+        margin-bottom: 0.75rem;
+      }
+      .wf-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px dashed #e5e7eb;
+        margin-bottom: 0.75rem;
+      }
+      .wf-logo {
+        width: 72px;
+        height: 28px;
+        background: repeating-linear-gradient(
+          -45deg,
+          #f2c94c,
+          #f2c94c 4px,
+          #f2994a 4px,
+          #f2994a 8px
+        );
+        border-radius: 4px;
+      }
+      .wf-brand {
+        font-weight: 700;
+        font-size: 0.95rem;
+      }
+      .wf-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.65rem;
+        font-size: 0.65rem;
+        color: #6b7280;
+      }
+      .wf-nav span {
+        padding: 0.15rem 0.35rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        background: #f7f8fa;
+      }
+      .wf-box {
+        background: #f7f8fa;
+        border: 1px dashed #d1d5db;
+        border-radius: 8px;
+        padding: 0.6rem;
+        font-size: 0.7rem;
+        color: #6b7280;
+      }
+      .wf-row {
+        display: grid;
+        gap: 0.5rem;
+      }
+      @media (min-width: 640px) {
+        .wf-row.cols-3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .wf-row.cols-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .wf-cal {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        font-size: 0.55rem;
+        text-align: center;
+      }
+      .wf-cal div {
+        padding: 0.35rem 0;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        min-height: 1.75rem;
+      }
+      .wf-cal .hl {
+        background: #f2c94c55;
+        border-color: #f2c94c;
+      }
+      .wf-kanban {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 520px) {
+        .wf-kanban {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .wf-col {
+        background: #f7f8fa;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 0.5rem;
+        min-height: 120px;
+      }
+      .wf-col h4 {
+        margin: 0 0 0.5rem;
+        font-size: 0.65rem;
+        color: #1f2937;
+      }
+      .wf-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 0.4rem;
+        margin-bottom: 0.35rem;
+        font-size: 0.6rem;
+      }
+      .wf-footer {
+        font-size: 0.65rem;
+        color: #6b7280;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        justify-content: space-between;
+        padding-top: 0.5rem;
+        border-top: 1px dashed #e5e7eb;
+      }
+      @media print {
+        body {
+          padding: 0.5rem;
+        }
+        .screen {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Protótipo de interface (baixa / média fidelidade)</h1>
+    <p class="meta">
+      <strong>HR Connect</strong> — Portal de comunicação e atividades internas
+      (referência visual para telas principais; não substitui o sistema em
+      produção).
+    </p>
+
+    <section class="screen" aria-label="Estrutura global">
+      <div class="screen-title">Layout global — cabeçalho e rodapé</div>
+      <div class="wf-header">
+        <div class="wf-logo" title="Área da logomarca"></div>
+        <span class="wf-brand">HR Connect</span>
+        <div class="wf-nav" aria-hidden="true">
+          <span>Home</span>
+          <span>Comunicados</span>
+          <span>Eventos</span>
+          <span>Onboarding</span>
+          <span>Empresa</span>
+          <span>Recursos</span>
+        </div>
+      </div>
+      <div class="wf-box" style="min-height: 4rem">Área principal da página</div>
+      <div class="wf-footer">
+        <span>© Empresa</span>
+        <span>Portal do colaborador</span>
+        <span>Suporte / RH</span>
+      </div>
+    </section>
+
+    <section class="screen" aria-label="Home">
+      <div class="screen-title">Home — painel resumido</div>
+      <div class="wf-box" style="margin-bottom: 0.5rem">
+        Faixa de boas-vindas / mensagem institucional
+      </div>
+      <div class="wf-row cols-3">
+        <div class="wf-box">Próximos eventos (até 3)</div>
+        <div class="wf-box">Comunicados recentes (até 3)</div>
+        <div class="wf-box">Onboarding em destaque (até 3)</div>
+      </div>
+    </section>
+
+    <section class="screen" aria-label="Comunicados">
+      <div class="screen-title">Comunicados — lista com paginação</div>
+      <div class="wf-box" style="margin-bottom: 0.5rem">Título + categoria + data</div>
+      <div class="wf-box" style="margin-bottom: 0.35rem">Card — texto completo do comunicado</div>
+      <div class="wf-box" style="margin-bottom: 0.35rem">Card …</div>
+      <div class="wf-box" style="margin-top: 0.5rem; text-align: center">
+        ◀ Anterior · Página 1 de N · Próxima ▶
+      </div>
+    </section>
+
+    <section class="screen" aria-label="Eventos">
+      <div class="screen-title">Eventos — calendário + lista rolável</div>
+      <div class="wf-box" style="margin-bottom: 0.5rem; text-align: center">
+        ◀ Mês / Anno ▶
+      </div>
+      <div class="wf-cal" aria-hidden="true">
+        <div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div>
+        <div></div><div></div><div class="hl">1</div><div>2</div><div>3</div><div class="hl">4</div><div>5</div>
+        <div>6</div><div>7</div><div>8</div><div class="hl">9</div><div>10</div><div>11</div><div>12</div>
+      </div>
+      <div class="wf-box" style="margin-top: 0.75rem; max-height: 5rem; overflow: hidden">
+        Lista de eventos (área com rolagem quando há muitos itens) → detalhe em
+        modal ao clicar
+      </div>
+    </section>
+
+    <section class="screen" aria-label="Onboarding">
+      <div class="screen-title">Onboarding — quadro Kanban (status no navegador)</div>
+      <div class="wf-kanban">
+        <div class="wf-col">
+          <h4>A Fazer</h4>
+          <div class="wf-card">Cartão ⋮ arrastar</div>
+          <div class="wf-card">Cartão</div>
+        </div>
+        <div class="wf-col">
+          <h4>Em andamento</h4>
+          <div class="wf-card">Cartão</div>
+        </div>
+        <div class="wf-col">
+          <h4>Concluído</h4>
+          <div class="wf-card">Cartão</div>
+        </div>
+      </div>
+      <p style="font-size: 0.65rem; color: #6b7280; margin: 0.5rem 0 0">
+        Itens definidos pelo RH na planilha; progresso individual em armazenamento
+        local (sem painel de “visto” pelo RH).
+      </p>
+    </section>
+
+    <section class="screen" aria-label="Recursos">
+      <div class="screen-title">Recursos — cards de links</div>
+      <div class="wf-row cols-2">
+        <div class="wf-box">Título + descrição + URL → abre em nova aba</div>
+        <div class="wf-box">…</div>
+      </div>
+    </section>
+
+    <section class="screen" aria-label="Empresa">
+      <div class="screen-title">Empresa — conteúdo institucional (texto fixo)</div>
+      <div class="wf-box">Quem somos</div>
+      <div class="wf-box" style="margin-top: 0.35rem">Valores (blocos com destaque visual)</div>
+    </section>
+
+    <p style="font-size: 0.75rem; color: #6b7280; margin-top: 1.5rem">
+      Este arquivo é estático: abra no navegador ou use Imprimir → Salvar em PDF
+      para anexar à documentação da disciplina.
+    </p>
+  </body>
+</html>

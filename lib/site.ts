@@ -9,5 +9,5 @@ export const ORG_NAME = "Invent Software";
  * Texto curto, sem dados sensíveis.
  */
 export const ACADEMIC_NOTICE =
-  "Ambiente demonstrativo desenvolvido no âmbito de projeto acadêmico extensionista — não constitui canal oficial da empresa.";
+  "Ambiente desenvolvimento e teste — não constitui canal oficial da empresa.";
 
