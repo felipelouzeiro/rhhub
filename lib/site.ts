@@ -1,0 +1,16 @@
+/** Nome exibido no portal */
+export const SITE_NAME = "HR Connect";
+
+/** Organização (crédito / rodapé) */
+export const ORG_NAME = "Invent Software";
+
+/**
+ * Aviso de que o site é material acadêmico/extensionista, não canal oficial.
+ * Texto curto, sem dados sensíveis.
+ */
+export const ACADEMIC_NOTICE =
+  "Ambiente demonstrativo desenvolvido no âmbito de projeto acadêmico extensionista — não constitui canal oficial da empresa.";
+
+/** Rodapé — sem expor e-mail corporativo. */
+export const SUPPORT_MESSAGE =
+  "Dúvidas sobre o portal: procure o setor de Recursos Humanos.";

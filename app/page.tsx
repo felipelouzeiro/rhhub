@@ -1,65 +1,152 @@
-import Image from "next/image";
+import Link from "next/link";
+import { AnnouncementCard } from "@/components/AnnouncementCard";
+import { SheetErrorBanner } from "@/components/SheetErrorBanner";
+import { formatDatePtBr, parseSheetDate } from "@/lib/date";
+import {
+  comunicadoResumo,
+  getComunicados,
+  getEventos,
+  getOnboardingKanbanItems,
+} from "@/lib/fetchData";
+import { proximosEventos } from "@/lib/events";
+import { ORG_NAME, SITE_NAME } from "@/lib/site";
 
-export default function Home() {
+export const metadata = {
+  title: "Início",
+};
+
+export default async function Home() {
+  const [com, ev, onb] = await Promise.all([
+    getComunicados(),
+    getEventos(),
+    getOnboardingKanbanItems(),
+  ]);
+
+  const errorParts = [com.error, ev.error, onb.error].filter(
+    (x): x is string => Boolean(x),
+  );
+  const errorMsg = errorParts.length
+    ? [...new Set(errorParts)].join(" ")
+    : null;
+
+  const recentes = com.data.slice(0, 3);
+  const proximos = proximosEventos(ev.data, 3);
+  const destaque = onb.data.slice(0, 3);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="space-y-12">
+      <SheetErrorBanner message={errorMsg} />
+
+      <section className="rounded-xl border border-[#E5E7EB] bg-white p-8 shadow-sm">
+        <h1 className="text-2xl font-semibold text-[#1F2937]">
+          Bem-vindo ao {SITE_NAME}
+        </h1>
+        <p className="mt-3 max-w-2xl text-[#6B7280]">
+          Aqui você encontra comunicados, eventos e recursos da {ORG_NAME}. O
+          conteúdo é atualizado pelo RH na planilha — atualize a página para ver
+          as últimas informações.
+        </p>
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <h2 className="text-lg font-semibold text-[#1F2937]">
+            Próximos eventos
+          </h2>
+          <Link
+            href="/eventos"
+            className="text-sm font-medium text-[#F2994A] hover:underline"
+          >
+            Ver todos
+          </Link>
+        </div>
+        {proximos.length === 0 ? (
+          <p className="text-sm text-[#6B7280]">Nenhum evento próximo.</p>
+        ) : (
+          <ul className="grid gap-3 sm:grid-cols-3">
+            {proximos.map((e) => (
+              <li
+                key={`${e.title}-${e.date}`}
+                className="rounded-lg border border-[#E5E7EB] bg-white p-4 shadow-sm"
+              >
+                <p className="font-medium text-[#1F2937]">{e.title}</p>
+                <p className="mt-2 text-sm text-[#6B7280]">
+                  {formatDatePtBr(parseSheetDate(e.date) ?? e.date)}
+                </p>
+                {e.location ? (
+                  <p className="mt-1 text-sm text-[#6B7280]">{e.location}</p>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <h2 className="text-lg font-semibold text-[#1F2937]">
+            Comunicados recentes
+          </h2>
+          <Link
+            href="/comunicados"
+            className="text-sm font-medium text-[#F2994A] hover:underline"
+          >
+            Ver todos
+          </Link>
+        </div>
+        {recentes.length === 0 ? (
+          <p className="text-sm text-[#6B7280]">Nenhum comunicado ainda.</p>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-3">
+            {recentes.map((c, i) => (
+              <AnnouncementCard
+                key={`${c.title}-${i}`}
+                item={c}
+                resumo={comunicadoResumo(c)}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <h2 className="text-lg font-semibold text-[#1F2937]">
+            Onboarding em destaque
+          </h2>
+          <Link
+            href="/onboarding"
+            className="text-sm font-medium text-[#F2994A] hover:underline"
+          >
+            Ver quadro
+          </Link>
+        </div>
+        {destaque.length === 0 ? (
+          <p className="text-sm text-[#6B7280]">
+            Nenhuma atividade de onboarding cadastrada.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        ) : (
+          <ul className="grid gap-3 md:grid-cols-3">
+            {destaque.map((a, i) => (
+              <li
+                key={`${a.id}-${i}`}
+                className="rounded-lg border border-[#E5E7EB] bg-white p-4 shadow-sm"
+              >
+                <p className="font-medium text-[#1F2937]">{a.title}</p>
+                {a.description ? (
+                  <p className="mt-2 line-clamp-4 text-sm text-[#6B7280]">
+                    {a.description}
+                  </p>
+                ) : null}
+                <p className="mt-2 text-xs text-[#6B7280]">
+                  Prazo sugerido:{" "}
+                  {formatDatePtBr(a.sortDeadline ?? a.deadline)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }
