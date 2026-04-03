@@ -1,4 +1,4 @@
-# Documentação do projeto — HR Connect
+# Documentação do projeto — RH Connect
 
 ---
 
@@ -14,7 +14,7 @@
 
 | Campo | Informação |
 |--------|------------|
-| **Projeto** | HR Connect — Portal de comunicação e atividades internas |
+| **Projeto** | RH Connect — Portal de comunicação e atividades internas |
 | **Disciplina** | Projeto Integrador III–B |
 | **Curso** | Análise e Desenvolvimento de Sistemas |
 | **Integrantes** | Felipe Alves Louzeiro |
@@ -23,7 +23,7 @@
 
 ## Resumo
 
-O **HR Connect** é um portal web voltado aos colaboradores, por meio do qual a área de **Gente e Gestão** centraliza comunicados, eventos, materiais de onboarding e links úteis. O conteúdo é mantido em planilhas, ferramenta já utilizada no cotidiano da equipe, sendo consumida pela aplicação sem necessidade de alteração de código a cada nova publicação. A solução prioriza usabilidade acessível e contempla um quadro Kanban para o onboarding interativo do colaborador, de modo a favorecer a conclusão das etapas e o uso do material de apoio antes do contato com o RH.
+O **RH Connect** é um portal web voltado aos colaboradores, por meio do qual a área de **Gente e Gestão** centraliza comunicados, eventos, materiais de onboarding e links úteis. O conteúdo é mantido em planilhas, ferramenta já utilizada no cotidiano da equipe, sendo consumida pela aplicação sem necessidade de alteração de código a cada nova publicação. A solução prioriza usabilidade acessível e contempla um quadro Kanban para o onboarding interativo do colaborador, de modo a favorecer a conclusão das etapas e o uso do material de apoio antes do contato com o RH.
 
 ---
 
@@ -149,7 +149,7 @@ npm start
 
 ### Deploy da versão de teste na Vercel
 
-**URL da aplicação (teste):** _[Acessar aplicação]()_
+**URL da aplicação (teste):** _[Acessar aplicação](https://rhhub.vercel.app/)_
 
 _Na publicação acadêmica, o SPREADSHEET_ID utilizado aponta para uma planilha de desenvolvimento, não para bases de uso operacional._
 
@@ -157,7 +157,7 @@ _Na publicação acadêmica, o SPREADSHEET_ID utilizado aponta para uma planilha
 
 ## 10. Considerações finais
 
-O HR Connect materializa uma resposta extensionista a uma demanda de organização de informações e de atividades voltadas ao colaborador, com sistema web em funcionamento, integração a dados externos, calendário de eventos e quadro Kanban para onboarding. Neste trabalho, o escopo privilegiou o portal de comunicação e o acompanhamento individual das tarefas de integração que eram cruciais as necessidades do departamento, deixando evoluções como login corporativo e painel administrativo dedicado como perspectivas futuras de melhoria.
+O RH Connect materializa uma resposta extensionista a uma demanda de organização de informações e de atividades voltadas ao colaborador, com sistema web em funcionamento, integração a dados externos, calendário de eventos e quadro Kanban para onboarding. Neste trabalho, o escopo privilegiou o portal de comunicação e o acompanhamento individual das tarefas de integração que eram cruciais as necessidades do departamento, deixando evoluções como login corporativo e painel administrativo dedicado como perspectivas futuras de melhoria.
 
 ---
 
